@@ -1,0 +1,89 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<nav
+  class="sticky top-0 z-50 border-b border-white/60 bg-paper/65 backdrop-blur-xl supports-[backdrop-filter]:bg-paper/45"
+>
+  <div class="container-full flex items-center justify-between gap-4 py-4 md:py-5">
+    <a href="#main" class="shrink-0 font-display text-xl font-normal tracking-tight">
+      SignalFormation<span class="hidden font-sans text-sm font-semibold text-ink/75 sm:inline"> / AI</span>
+    </a>
+
+    <div class="hidden items-center gap-5 lg:flex xl:gap-6">
+      <a
+        href="#approach"
+        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+      >
+        Approach
+      </a>
+      <a
+        href="#review"
+        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+      >
+        Review
+      </a>
+      <a
+        href="#audience"
+        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+      >
+        Who it is for
+      </a>
+      <a
+        href="#about"
+        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+      >
+        About
+      </a>
+      <a
+        href="#faq"
+        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+      >
+        FAQ
+      </a>
+      <a
+        href={siteConfig.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary px-5 py-3 text-sm"
+      >
+        Book a 30-minute discussion
+      </a>
+    </div>
+
+    <div class="flex items-center gap-3 lg:hidden">
+      <details class="relative">
+        <summary
+          class="cursor-pointer list-none rounded-full border border-ink/10 bg-white/80 px-4 py-2 text-sm font-semibold shadow-sm backdrop-blur focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+        >
+          Menu
+        </summary>
+        <div class="panel absolute right-0 z-50 mt-2 w-56 p-3">
+          <div class="flex flex-col gap-3 text-sm font-semibold">
+            <a href="#approach" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Approach</a>
+            <a href="#review" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Review</a>
+            <a href="#audience" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Who it is for</a>
+            <a href="#about" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">About</a>
+            <a href="#faq" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">FAQ</a>
+            <a
+              href={siteConfig.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-md px-2 py-1 text-ink transition hover:text-muted focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+            >
+              Book a 30-minute discussion
+            </a>
+          </div>
+        </div>
+      </details>
+      <a
+        href={siteConfig.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary hidden px-4 py-2.5 text-sm sm:inline-flex"
+      >
+        Book a discussion
+      </a>
+    </div>
+  </div>
+</nav>

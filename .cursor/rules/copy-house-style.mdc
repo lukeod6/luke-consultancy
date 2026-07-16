@@ -1,0 +1,14 @@
+---
+description: House style for all copy in this repo
+alwaysApply: true
+---
+
+# Copy house style
+
+- British English spelling throughout (optimise, programme, recognise).
+- Never use em dashes. Use commas, colons, or full stops.
+- No hedging or filler ("we believe", "leverage", "it's important to", "in today's world").
+- First person singular ("I", never "we"). This is a solo consultancy.
+- Punchy and credible. Short sentences. No marketing throat-clearing.
+
+When editing copy, change only the text I point you at. Do not restyle layout, classes, or components unless I ask.

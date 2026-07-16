@@ -1,0 +1,212 @@
+---
+const rows = [
+  {
+    initiative: 'Microsoft Copilot licences',
+    finding: '62 licences, with limited repeat usage outside leadership',
+    recommendation: 'Reduce licences and retrain two priority teams',
+    impact: '£14,000 annual cost recovery',
+  },
+  {
+    initiative: 'Proposal drafting',
+    finding: 'Strong time savings, but outputs require inconsistent review',
+    recommendation: 'Standardise the workflow and introduce approval checks',
+    impact: '420 hours released annually',
+  },
+  {
+    initiative: 'Internal knowledge assistant',
+    finding: 'Low answer reliability due to fragmented source material',
+    recommendation: 'Pause expansion and repair the underlying source data',
+    impact: '£18,000 of further spend avoided',
+  },
+  {
+    initiative: 'Client reporting',
+    finding: 'High manual workload with clear process ownership',
+    recommendation: 'Run a controlled six-week implementation pilot',
+    impact: '£32,000 estimated annual capacity value',
+  },
+];
+---
+
+<section class="container-full section-space">
+  <div
+    data-reveal
+    class="reveal-sequence rounded-panel border border-border/80 bg-surface-soft/90 px-6 py-10 md:px-10 md:py-14"
+  >
+    <div class="max-w-prose">
+      <p class="label">Sample output</p>
+      <h2 class="mt-2 text-section-title text-balance">See what the review produces</h2>
+      <p class="mt-5 text-[0.9375rem] leading-[1.65] text-muted md:text-base md:leading-[1.65]">
+        The review converts tool usage, workflow evidence and financial assumptions into clear
+        decisions for each AI initiative.
+      </p>
+    </div>
+
+    <figure
+      class="report mt-8 overflow-hidden rounded-2xl border border-ink/10 bg-white/95 shadow-sm"
+    >
+      <figcaption
+        class="flex items-center justify-between gap-3 border-b border-ink/10 bg-white px-5 py-4 md:px-8 md:py-5"
+      >
+        <span class="text-[0.8125rem] font-semibold uppercase tracking-widest text-slate">
+          Illustrative report excerpt
+        </span>
+      </figcaption>
+
+      <div class="px-5 py-5 md:px-8 md:py-7">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th scope="col">Initiative</th>
+              <th scope="col">Current finding</th>
+              <th scope="col">Recommendation</th>
+              <th scope="col" class="impact">Estimated impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((row) => (
+                <tr>
+                  <td data-label="Initiative" class="initiative">{row.initiative}</td>
+                  <td data-label="Current finding">{row.finding}</td>
+                  <td data-label="Recommendation">{row.recommendation}</td>
+                  <td data-label="Estimated impact" class="impact">{row.impact}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+
+        <div class="mt-7 rounded-xl border-l-2 border-accent bg-surface-soft/70 px-5 py-4 md:px-6 md:py-5">
+          <p class="text-[0.8125rem] font-semibold uppercase tracking-widest text-slate">
+            Recommended next step
+          </p>
+          <p class="mt-2 text-[0.9375rem] font-semibold leading-[1.6] text-ink md:text-base">
+            Stop one initiative, repair two and run one controlled pilot over the next 90 days.
+          </p>
+        </div>
+      </div>
+    </figure>
+
+    <p class="mt-6 max-w-prose text-[0.9375rem] leading-[1.65] text-muted md:text-base">
+      Estimates distinguish between theoretical time saved and value that can realistically be
+      realised through cost reduction, avoided hiring, redeployed capacity or increased revenue.
+    </p>
+
+    <p class="mt-4 text-[0.8125rem] italic leading-relaxed text-muted/80">
+      Example figures shown for demonstration only.
+    </p>
+  </div>
+</section>
+
+<style>
+  .report-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .report-table thead th {
+    padding: 0 0 0.875rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #5f6b75;
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: 1px solid rgba(31, 41, 51, 0.12);
+  }
+
+  .report-table tbody td {
+    padding: 1.125rem 1.25rem 1.125rem 0;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: #44525c;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(31, 41, 51, 0.08);
+  }
+
+  .report-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .report-table td.initiative {
+    font-weight: 600;
+    color: #1f2933;
+  }
+
+  .report-table th.impact,
+  .report-table td.impact {
+    text-align: right;
+    padding-right: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .report-table td.impact {
+    font-weight: 600;
+    color: #1f2933;
+    white-space: nowrap;
+  }
+
+  /* Give the finding and recommendation columns comfortable room */
+  .report-table thead th:nth-child(1),
+  .report-table tbody td:nth-child(1) {
+    width: 20%;
+    padding-right: 1.5rem;
+  }
+
+  .report-table thead th:nth-child(4),
+  .report-table tbody td:nth-child(4) {
+    width: 22%;
+    padding-left: 1.5rem;
+  }
+
+  /* Mobile: stack each row into a self-contained report card */
+  @media (max-width: 767px) {
+    .report-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .report-table tbody tr {
+      display: block;
+      border: 1px solid rgba(31, 41, 51, 0.12);
+      border-radius: 0.875rem;
+      padding: 1.25rem 1.25rem 0.5rem;
+      background: #ffffff;
+    }
+
+    .report-table tbody tr + tr {
+      margin-top: 0.875rem;
+    }
+
+    .report-table tbody td {
+      display: block;
+      width: auto !important;
+      padding: 0 0 0.875rem !important;
+      border-bottom: 0;
+      text-align: left;
+    }
+
+    .report-table tbody td::before {
+      content: attr(data-label);
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #5f6b75;
+    }
+
+    .report-table td.impact {
+      white-space: normal;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import { siteConfig } from '../config/site';
+
+const showLinkedIn = Boolean(siteConfig.linkedInUrl);
+---
+
+<footer class="container-full border-t border-white/60 py-10">
+  <div class="space-y-2 text-sm text-muted md:flex md:items-center md:justify-between md:space-y-0">
+    <p>© 2026 SignalFormation. Independent AI value recovery for UK SMEs.</p>
+    <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <a
+        href={`mailto:${siteConfig.email}`}
+        class="font-semibold underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+        >{siteConfig.email}</a
+      >
+      {
+        showLinkedIn && (
+          <>
+            <span aria-hidden="true">·</span>
+            <a
+              href={siteConfig.linkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+            >
+              LinkedIn
+            </a>
+          </>
+        )
+      }
+    </p>
+  </div>
+</footer>
