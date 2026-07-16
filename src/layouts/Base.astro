@@ -3,7 +3,6 @@ import '../styles/global.css';
 import { siteConfig } from '../config/site';
 
 const { title, description, ogImage = '/favicon.svg' } = Astro.props;
-// TODO: replace site domain in astro.config.mjs before launch.
 // Optional: add a dedicated /public/og-image.png and pass ogImage="/og-image.png".
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const linkedInSameAs = siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : [];
@@ -66,11 +65,10 @@ const linkedInSameAs = siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : [];
       })}
     />
 
-    <!-- TODO: replace TODO-domain.com with production domain -->
     <script
       is:inline
       defer
-      data-domain="TODO-domain.com"
+      data-domain="signalformation.com"
       src="https://plausible.io/js/script.js"
     ></script>
   </head>
