@@ -211,7 +211,9 @@ const rows = [
       color: #5f6b75;
     }
 
-    .report-table td.impact {
+    /* Must match the `tbody` in the desktop rule above (line ~148) or this
+       loses the specificity tie-break and nowrap wins, clipping the figure. */
+    .report-table tbody td.impact {
       white-space: normal;
     }
   }
