@@ -7,7 +7,7 @@
  */
 export const siteConfig = {
   siteName: 'SignalFormation',
-  bookingUrl: import.meta.env.PUBLIC_BOOKING_URL ?? 'https://cal.com/TODO/30min',
+  bookingUrl: import.meta.env.PUBLIC_BOOKING_URL ?? 'https://calendly.com/luke-signalformation/30-minute-discussion',
   email: import.meta.env.PUBLIC_EMAIL ?? 'luke@signalformation.com',
   linkedInUrl: import.meta.env.PUBLIC_LINKEDIN_URL ?? '',
 };
