@@ -33,7 +33,7 @@ const rows = [
     class="reveal-sequence rounded-panel border border-border/80 bg-surface-soft/90 px-6 py-10 md:px-10 md:py-14"
   >
     <div class="max-w-prose">
-      <p class="label">Sample output</p>
+      <p class="label-accent">Sample output</p>
       <h2 class="mt-2 text-section-title text-balance">See what the review produces</h2>
       <p class="mt-5 text-[0.9375rem] leading-[1.65] text-muted md:text-base md:leading-[1.65]">
         The review converts tool usage, workflow evidence and financial assumptions into clear
@@ -129,7 +129,9 @@ const rows = [
     border-bottom: 0;
   }
 
-  .report-table td.initiative {
+  /* `tbody` is load-bearing in these selectors: `.report-table tbody td` above
+     outranks a bare `.report-table td.x`, so the colour would never land. */
+  .report-table tbody td.initiative {
     font-weight: 600;
     color: #1f2933;
   }
@@ -141,9 +143,13 @@ const rows = [
     font-variant-numeric: tabular-nums;
   }
 
-  .report-table td.impact {
+  /* The impact column is the point of the whole table: it should read before
+     the prose either side of it, not the same as it. */
+  .report-table tbody td.impact {
     font-weight: 600;
-    color: #1f2933;
+    font-size: 1rem;
+    color: #2f6f5e;
+    letter-spacing: -0.01em;
     white-space: nowrap;
   }
 

@@ -62,11 +62,17 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-surface-strong px-7 py-3.5 text-sm font-semibold text-white shadow-glow transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-slate hover:shadow-panel focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-surface-strong px-7 py-3.5 text-sm font-semibold text-white shadow-glow transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-slate hover:shadow-panel-lift focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
+  }
+
+  /* For use on .panel-dark, where .btn-primary's ink fill is invisible
+     against an identical ink background. */
+  .btn-invert {
+    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-glow transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-accent-wash hover:shadow-panel-lift focus-visible:outline-2 focus-visible:outline-accent-soft focus-visible:outline-offset-4;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-ink/15 bg-white/80 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-md transition duration-300 ease-out hover:-translate-y-0.5 hover:border-slate/45 hover:bg-white hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center rounded-full border border-ink/15 bg-white/80 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-md transition duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/45 hover:bg-white hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
   }
 
   .chip {
@@ -85,12 +91,39 @@
     @apply text-white;
   }
 
+  /* Lists of deliverables/criteria carry no marker by default, which leaves
+     them reading as an undifferentiated block of prose. */
+  .list-marked > li {
+    @apply relative pl-5;
+  }
+
+  .list-marked > li::before {
+    content: '';
+    @apply absolute left-0 top-[0.62em] h-1.5 w-1.5 rounded-full bg-accent;
+  }
+
+  .panel-dark .list-marked > li::before {
+    @apply bg-accent-soft;
+  }
+
   .faq-item {
     @apply rounded-xl px-4 py-5 transition hover:bg-white/90 open:bg-white/95;
   }
 
   .faq-summary {
-    @apply cursor-pointer rounded-md text-base font-semibold leading-relaxed text-ink marker:content-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 active:text-ink/80;
+    @apply flex cursor-pointer items-start justify-between gap-6 rounded-md text-base font-semibold leading-relaxed text-ink transition-colors marker:content-none hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 active:text-ink/80;
+  }
+
+  /* The default disclosure triangle is suppressed above, so without this the
+     questions give no sign they open. */
+  .faq-summary::after {
+    content: '';
+    @apply mt-1.5 h-2 w-2 shrink-0 border-b-2 border-r-2 border-accent transition-transform duration-200 ease-out;
+    transform: rotate(45deg);
+  }
+
+  .faq-item[open] .faq-summary::after {
+    transform: rotate(-135deg);
   }
 
   .faq-answer {
@@ -113,6 +146,17 @@
     @apply text-[0.8125rem] font-semibold uppercase tracking-widest text-muted;
   }
 
+  /* Section eyebrows: the accent plus a short rule give each section a visible
+     starting edge instead of grey text floating above a heading. */
+  .label-accent {
+    @apply flex items-center gap-2.5 text-[0.8125rem] font-semibold uppercase tracking-widest text-accent;
+  }
+
+  .label-accent::before {
+    content: '';
+    @apply h-px w-6 shrink-0 bg-accent/60;
+  }
+
   .container-prose {
     @apply mx-auto max-w-prose px-6 md:px-10 lg:px-12;
   }
@@ -123,6 +167,14 @@
 
   .section-space {
     @apply py-16 md:py-section lg:py-section-lg;
+  }
+
+  /* Anchored to the top of the page rather than fixed, so the colour belongs to
+     the hero and drains away as you scroll into the body content. */
+  .ambient-wash {
+    background-image:
+      radial-gradient(60% 55% at 12% 0%, rgba(47, 111, 94, 0.10) 0%, transparent 70%),
+      radial-gradient(50% 45% at 88% 8%, rgba(144, 186, 173, 0.16) 0%, transparent 70%);
   }
 
   .ambient-grid {
@@ -137,7 +189,7 @@
   }
 
   .lift-hover {
-    @apply transition duration-300 ease-out hover:-translate-y-1.5;
+    @apply transition duration-300 ease-out hover:-translate-y-1.5 hover:border-accent-soft/50 hover:shadow-panel-lift;
   }
 
   .reveal-sequence {

@@ -13,14 +13,13 @@ export default {
         surface: '#FFFFFF',
         'surface-soft': '#EAF4F1',
         'surface-strong': '#1F2933',
-        accent: '#90BAAD',
-        electric: '#A1E5AB',
-        coral: '#ADF6B1',
+        // Single teal accent, three weights. `accent` passes AA on paper and
+        // white, so it can carry text and rules rather than only 6px dots.
+        accent: '#2F6F5E',
+        'accent-soft': '#90BAAD',
+        'accent-wash': '#DCEBE5',
         slate: '#5F6B75',
         'cool-steel': '#6F8790',
-        'muted-teal': '#90BAAD',
-        celadon: '#A1E5AB',
-        'light-green': '#ADF6B1',
       },
       fontFamily: {
         display: ['"Instrument Serif"', 'Georgia', 'serif'],
@@ -49,21 +48,11 @@ export default {
         'panel-lg': '2rem',
       },
       boxShadow: {
-        glow: '0 12px 48px rgba(113, 124, 137, 0.22)',
-        panel: '0 20px 60px rgba(31, 41, 51, 0.12)',
-      },
-      backgroundImage: {
-        aurora:
-          'radial-gradient(circle at 0% 10%, rgba(143, 186, 173, 0.28) 0%, transparent 35%), radial-gradient(circle at 85% 20%, rgba(113, 124, 137, 0.24) 0%, transparent 40%), radial-gradient(circle at 65% 80%, rgba(161, 229, 171, 0.22) 0%, transparent 45%)',
-      },
-      keyframes: {
-        'float-slow': {
-          '0%, 100%': { transform: 'translate3d(0, 0, 0) scale(1)' },
-          '50%': { transform: 'translate3d(0, -14px, 0) scale(1.02)' },
-        },
-      },
-      animation: {
-        'float-slow': 'float-slow 10s ease-in-out infinite',
+        // Layered: a tight contact shadow reads as an edge, the wide one as depth.
+        // A single wide blur alone just looks foggy.
+        glow: '0 1px 2px rgba(31, 41, 51, 0.16), 0 8px 24px rgba(31, 41, 51, 0.18)',
+        panel: '0 1px 2px rgba(31, 41, 51, 0.05), 0 12px 32px -8px rgba(31, 41, 51, 0.13)',
+        'panel-lift': '0 2px 4px rgba(31, 41, 51, 0.06), 0 22px 48px -12px rgba(31, 41, 51, 0.20)',
       },
     },
   },

@@ -1,6 +1,6 @@
 <section class="container-full section-space">
   <div data-reveal class="reveal-sequence max-w-prose">
-    <p class="label">The problem</p>
+    <p class="label-accent">The problem</p>
     <h2 class="mt-2 text-section-title text-balance">
       AI activity is not the same as business value.
     </h2>
@@ -12,26 +12,28 @@
   </div>
 
   <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    <article data-reveal data-reveal-delay="1" class="reveal-sequence panel p-5 md:p-6">
-      <h3 class="text-[0.9375rem] font-semibold leading-snug md:text-base">
-        Recover wasted software spend
-      </h3>
-    </article>
-    <article data-reveal data-reveal-delay="1" class="reveal-sequence panel p-5 md:p-6">
-      <h3 class="text-[0.9375rem] font-semibold leading-snug md:text-base">
-        Repair high-potential workflows
-      </h3>
-    </article>
-    <article data-reveal data-reveal-delay="2" class="reveal-sequence panel p-5 md:p-6">
-      <h3 class="text-[0.9375rem] font-semibold leading-snug md:text-base">
-        Measure realised operational value
-      </h3>
-    </article>
-    <article data-reveal data-reveal-delay="2" class="reveal-sequence panel p-5 md:p-6">
-      <h3 class="text-[0.9375rem] font-semibold leading-snug md:text-base">
-        Prioritise the next 90 days
-      </h3>
-    </article>
+    {
+      [
+        { n: '01', title: 'Recover wasted software spend', delay: '1' },
+        { n: '02', title: 'Repair high-potential workflows', delay: '1' },
+        { n: '03', title: 'Measure realised operational value', delay: '2' },
+        { n: '04', title: 'Prioritise the next 90 days', delay: '2' },
+      ].map((card) => (
+        <article
+          data-reveal
+          data-reveal-delay={card.delay}
+          class="reveal-sequence panel lift-hover flex flex-col gap-5 p-5 md:p-6"
+        >
+          <span
+            aria-hidden="true"
+            class="font-display text-[1.75rem] leading-none text-accent/45"
+          >
+            {card.n}
+          </span>
+          <h3 class="text-[0.9375rem] font-semibold leading-snug md:text-base">{card.title}</h3>
+        </article>
+      ))
+    }
   </div>
 
   <aside
