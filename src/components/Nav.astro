@@ -1,13 +1,14 @@
 ---
 import { siteConfig } from '../config/site';
+import Logo from './Logo.astro';
 ---
 
 <nav
   class="sticky top-0 z-50 border-b border-white/60 bg-paper/65 backdrop-blur-xl supports-[backdrop-filter]:bg-paper/45"
 >
   <div class="container-full flex items-center justify-between gap-4 py-4 md:py-5">
-    <a href="#main" class="shrink-0 font-display text-xl font-normal tracking-tight">
-      SignalFormation<span class="hidden font-sans text-sm font-semibold text-ink/75 sm:inline"> / AI</span>
+    <a href="#main" class="shrink-0 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+      <Logo variant="horizontal" />
     </a>
 
     <div class="hidden items-center gap-5 lg:flex xl:gap-6">

@@ -16,6 +16,7 @@ export default {
         // Single teal accent, three weights. `accent` passes AA on paper and
         // white, so it can carry text and rules rather than only 6px dots.
         accent: '#2F6F5E',
+        'accent-strong': '#245A4C',
         'accent-soft': '#90BAAD',
         'accent-wash': '#DCEBE5',
         slate: '#5F6B75',

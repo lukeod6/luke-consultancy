@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 110" width="260" height="110">
+  <g transform="translate(102 6) scale(1)"><g fill="#2F6F5E">
+    <circle cx="28" cy="12" r="5"></circle>
+    <circle cx="18" cy="21" r="4" opacity="0.82"></circle>
+    <circle cx="38" cy="21" r="4" opacity="0.82"></circle>
+    <circle cx="9" cy="29.5" r="3" opacity="0.55"></circle>
+    <circle cx="47" cy="29.5" r="3" opacity="0.55"></circle>
+  </g></g>
+  <text x="130" y="102" text-anchor="middle" font-family="&#39;Instrument Serif&#39;, Georgia, serif" font-size="34" letter-spacing="-0.5" fill="#1F2933">SignalFormation</text>
+</svg>

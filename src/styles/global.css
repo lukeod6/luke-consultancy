@@ -62,7 +62,7 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-surface-strong px-7 py-3.5 text-sm font-semibold text-white shadow-glow transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-slate hover:shadow-panel-lift focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-glow transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-panel-lift focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
   }
 
   /* For use on .panel-dark, where .btn-primary's ink fill is invisible

@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import { siteConfig } from '../config/site';
 
-const { title, description, ogImage = '/favicon.svg' } = Astro.props;
+const { title, description, ogImage = '/brand/signalformation-favicon.png' } = Astro.props;
 // Optional: add a dedicated /public/og-image.png and pass ogImage="/og-image.png".
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const linkedInSameAs = siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : [];
@@ -36,8 +36,13 @@ const linkedInSameAs = siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : [];
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
     />
 
+    <meta name="theme-color" content="#2F6F5E" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <script
       is:inline

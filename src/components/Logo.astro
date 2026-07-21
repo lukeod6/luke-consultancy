@@ -1,0 +1,66 @@
+---
+interface Props {
+  class?: string;
+  /** `mark` = icon only. `horizontal` = full lockup. */
+  variant?: 'mark' | 'horizontal';
+  /** Invert colours for dark panels. */
+  inverted?: boolean;
+}
+
+const { class: className = '', variant = 'horizontal', inverted = false } = Astro.props;
+---
+
+{
+  variant === 'mark' ? (
+    <img
+      src={
+        inverted
+          ? '/brand/signalformation-icon-white.svg'
+          : '/brand/signalformation-icon.svg'
+      }
+      alt="SignalFormation"
+      width="56"
+      height="56"
+      class:list={['h-8 w-auto', className]}
+      decoding="async"
+    />
+  ) : inverted ? (
+    <img
+      src="/brand/signalformation-reversed.png"
+      alt="SignalFormation"
+      width="430"
+      height="140"
+      class:list={['h-8 w-auto md:h-9', className]}
+      decoding="async"
+    />
+  ) : (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 430 60"
+      width="430"
+      height="60"
+      role="img"
+      aria-label="SignalFormation"
+      class:list={['h-8 w-auto md:h-9', className]}
+    >
+      <title>SignalFormation</title>
+      <g transform="translate(0 2) scale(1.05)">
+        <g fill="#2F6F5E">
+          <circle cx="28" cy="12" r="5"></circle>
+          <circle cx="18" cy="21" r="4" opacity="0.82"></circle>
+          <circle cx="38" cy="21" r="4" opacity="0.82"></circle>
+          <circle cx="9" cy="29.5" r="3" opacity="0.55"></circle>
+          <circle cx="47" cy="29.5" r="3" opacity="0.55"></circle>
+        </g>
+      </g>
+      <text
+        x="80"
+        y="46"
+        font-family="'Instrument Serif', Georgia, serif"
+        font-size="46"
+        letter-spacing="-0.8"
+        fill="#1F2933">SignalFormation</text
+      >
+    </svg>
+  )
+}

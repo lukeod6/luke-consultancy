@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56">
-  <rect width="56" height="56" rx="13" fill="#2F6F5E"></rect>
-  <g transform="translate(9 12) scale(0.68)"><g fill="#FFFFFF">
+  <g fill="#FFFFFF">
     <circle cx="28" cy="12" r="5"></circle>
     <circle cx="18" cy="21" r="4" opacity="0.82"></circle>
     <circle cx="38" cy="21" r="4" opacity="0.82"></circle>
     <circle cx="9" cy="29.5" r="3" opacity="0.55"></circle>
     <circle cx="47" cy="29.5" r="3" opacity="0.55"></circle>
-  </g></g>
+  </g>
 </svg>
