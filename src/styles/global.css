@@ -10,8 +10,8 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
-    background-color: #f4f8f6;
-    color: #1f2933;
+    background-color: #f7f4ed;
+    color: #202729;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     overflow-x: hidden;
@@ -36,7 +36,7 @@
 
   h1,
   h2 {
-    @apply font-display font-normal tracking-[-0.02em];
+    @apply font-display font-semibold;
   }
 
   h3 {
@@ -62,37 +62,33 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-glow transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-panel-lift focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center rounded-md border border-transparent bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-accent-strong focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
   }
 
-  /* For use on .panel-dark, where .btn-primary's ink fill is invisible
-     against an identical ink background. */
   .btn-invert {
-    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-glow transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-accent-wash hover:shadow-panel-lift focus-visible:outline-2 focus-visible:outline-accent-soft focus-visible:outline-offset-4;
+    @apply inline-flex items-center justify-center rounded-md border border-white bg-white px-7 py-3.5 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-paper focus-visible:outline-2 focus-visible:outline-accent-soft focus-visible:outline-offset-4;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-ink/15 bg-white/80 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-md transition duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/45 hover:bg-white hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center rounded-md border border-ink/25 bg-transparent px-6 py-3 text-sm font-semibold text-ink transition-colors duration-150 hover:border-ink hover:bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
   }
 
   .chip {
-    @apply inline-flex items-center rounded-full border border-cool-steel/40 bg-cool-steel/15 px-4 py-1.5 text-[0.8125rem] font-semibold uppercase tracking-widest text-ink;
+    @apply inline-flex items-center border border-cool-steel/40 px-4 py-1.5 text-sm font-semibold text-ink;
   }
 
   .panel {
-    @apply rounded-panel border border-white/60 bg-white/75 shadow-panel backdrop-blur-md;
+    @apply rounded-panel border border-ink/15 bg-white;
   }
 
   .panel-dark {
-    @apply rounded-panel border border-white/10 bg-surface-strong text-white shadow-panel;
+    @apply rounded-panel border border-ink bg-surface-strong text-white;
   }
 
   .panel-dark .label {
     @apply text-white;
   }
 
-  /* Lists of deliverables/criteria carry no marker by default, which leaves
-     them reading as an undifferentiated block of prose. */
   .list-marked > li {
     @apply relative pl-5;
   }
@@ -107,15 +103,13 @@
   }
 
   .faq-item {
-    @apply rounded-xl px-4 py-5 transition hover:bg-white/90 open:bg-white/95;
+    @apply border-b border-border py-6;
   }
 
   .faq-summary {
-    @apply flex cursor-pointer items-start justify-between gap-6 rounded-md text-base font-semibold leading-relaxed text-ink transition-colors marker:content-none hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 active:text-ink/80;
+    @apply flex cursor-pointer items-start justify-between gap-6 text-base font-semibold leading-relaxed text-ink transition-colors marker:content-none hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 active:text-ink/80;
   }
 
-  /* The default disclosure triangle is suppressed above, so without this the
-     questions give no sign they open. */
   .faq-summary::after {
     content: '';
     @apply mt-1.5 h-2 w-2 shrink-0 border-b-2 border-r-2 border-accent transition-transform duration-200 ease-out;
@@ -143,18 +137,11 @@
 
 @layer utilities {
   .label {
-    @apply text-[0.8125rem] font-semibold uppercase tracking-widest text-muted;
+    @apply text-sm font-semibold text-muted;
   }
 
-  /* Section eyebrows: the accent plus a short rule give each section a visible
-     starting edge instead of grey text floating above a heading. */
   .label-accent {
-    @apply flex items-center gap-2.5 text-[0.8125rem] font-semibold uppercase tracking-widest text-accent;
-  }
-
-  .label-accent::before {
-    content: '';
-    @apply h-px w-6 shrink-0 bg-accent/60;
+    @apply text-sm font-semibold text-accent;
   }
 
   .container-prose {
@@ -169,52 +156,27 @@
     @apply py-16 md:py-section lg:py-section-lg;
   }
 
-  /* Anchored to the top of the page rather than fixed, so the colour belongs to
-     the hero and drains away as you scroll into the body content. */
-  .ambient-wash {
-    background-image:
-      radial-gradient(60% 55% at 12% 0%, rgba(47, 111, 94, 0.10) 0%, transparent 70%),
-      radial-gradient(50% 45% at 88% 8%, rgba(144, 186, 173, 0.16) 0%, transparent 70%);
-  }
-
-  .ambient-grid {
-    background-image:
-      linear-gradient(to right, rgba(113, 124, 137, 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(113, 124, 137, 0.08) 1px, transparent 1px);
-    background-size: 72px 72px;
-  }
-
   .text-balance {
     text-wrap: balance;
   }
 
   .lift-hover {
-    @apply transition duration-300 ease-out hover:-translate-y-1.5 hover:border-accent-soft/50 hover:shadow-panel-lift;
+    @apply transition-colors duration-150 hover:border-ink/35;
   }
 
-  .reveal-sequence {
+  .hero-intro {
+    animation: hero-arrival 480ms ease-out both;
+  }
+}
+
+@keyframes hero-arrival {
+  from {
     opacity: 0;
-    transform: translate3d(0, 26px, 0) scale(0.98);
+    transform: translateY(10px);
   }
-
-  .reveal-sequence.is-visible {
+  to {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    transition:
-      opacity 560ms cubic-bezier(0.18, 0.89, 0.32, 1),
-      transform 560ms cubic-bezier(0.18, 0.89, 0.32, 1);
-  }
-
-  .reveal-sequence[data-reveal-delay='1'].is-visible {
-    transition-delay: 80ms;
-  }
-
-  .reveal-sequence[data-reveal-delay='2'].is-visible {
-    transition-delay: 160ms;
-  }
-
-  .reveal-sequence[data-reveal-delay='3'].is-visible {
-    transition-delay: 240ms;
+    transform: translateY(0);
   }
 }
 
@@ -231,8 +193,7 @@
     transition-duration: 0.01ms !important;
   }
 
-  .reveal-sequence {
-    opacity: 1 !important;
-    transform: none !important;
+  .hero-intro {
+    animation: none;
   }
 }

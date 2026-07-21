@@ -4,7 +4,7 @@ import Logo from './Logo.astro';
 ---
 
 <nav
-  class="sticky top-0 z-50 border-b border-white/60 bg-paper/65 backdrop-blur-xl supports-[backdrop-filter]:bg-paper/45"
+  class="sticky top-0 z-50 border-b border-border bg-paper"
 >
   <div class="container-full flex items-center justify-between gap-4 py-4 md:py-5">
     <a href="#main" class="shrink-0 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
@@ -19,10 +19,10 @@ import Logo from './Logo.astro';
         Approach
       </a>
       <a
-        href="#review"
+        href="#output"
         class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
       >
-        Review
+        Output
       </a>
       <a
         href="#audience"
@@ -55,14 +55,14 @@ import Logo from './Logo.astro';
     <div class="flex items-center gap-3 lg:hidden">
       <details class="relative">
         <summary
-          class="cursor-pointer list-none rounded-full border border-ink/10 bg-white/80 px-4 py-2 text-sm font-semibold shadow-sm backdrop-blur focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+          class="cursor-pointer list-none rounded-md border border-ink/20 bg-transparent px-4 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
         >
           Menu
         </summary>
         <div class="panel absolute right-0 z-50 mt-2 w-56 p-3">
           <div class="flex flex-col gap-3 text-sm font-semibold">
             <a href="#approach" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Approach</a>
-            <a href="#review" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Review</a>
+            <a href="#output" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Output</a>
             <a href="#audience" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Who it is for</a>
             <a href="#about" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">About</a>
             <a href="#faq" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">FAQ</a>

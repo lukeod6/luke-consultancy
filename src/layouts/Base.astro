@@ -33,7 +33,7 @@ const linkedInSameAs = siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : [];
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
     />
 
     <meta name="theme-color" content="#2F6F5E" />
@@ -53,8 +53,9 @@ const linkedInSameAs = siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : [];
         name: "Luke Strugnell O'Donnell",
         jobTitle: 'AI Value Recovery Consultant',
         description:
-          'Independent, founder-led consultancy helping UK SMEs assess existing AI expenditure, repair stalled initiatives and produce measurable operational value.',
+          'Founder of SignalFormation, which reviews underperforming AI spend for established UK SMEs and turns the evidence into clear commercial decisions.',
         url: Astro.site?.toString(),
+        image: new URL('/luke-and-deer.png', Astro.site),
         email: siteConfig.email.includes('TODO') ? undefined : siteConfig.email,
         sameAs: linkedInSameAs,
         alumniOf: [
@@ -78,35 +79,11 @@ const linkedInSameAs = siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : [];
     ></script>
   </head>
   <body>
-    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 bg-surface-soft/45"></div>
-    <div
-      aria-hidden="true"
-      class="pointer-events-none fixed inset-0 -z-10 opacity-50 ambient-grid [mask-image:radial-gradient(circle_at_center,black_20%,transparent_75%)]"
-    ></div>
-    <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[820px] ambient-wash"></div>
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:rounded focus:bg-ink focus:px-3 focus:py-2 focus:text-paper"
       >Skip to content</a
     >
     <slot />
-    <script is:inline>
-      (() => {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        const sections = document.querySelectorAll('[data-reveal]');
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
-        );
-        sections.forEach((section) => observer.observe(section));
-      })();
-    </script>
   </body>
 </html>

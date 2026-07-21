@@ -1,49 +1,28 @@
-<section class="container-full section-space">
-  <div data-reveal class="reveal-sequence max-w-prose">
+<section id="problem" class="container-full section-space border-t border-border">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
+    <div class="max-w-xl">
     <p class="label-accent">The problem</p>
-    <h2 class="mt-2 text-section-title text-balance">
+      <h2 class="mt-3 text-section-title text-balance">
       AI activity is not the same as business value.
     </h2>
-    <p class="mt-5 text-[0.9375rem] leading-[1.65] text-muted md:text-base md:leading-[1.65]">
+    </div>
+
+    <div class="max-w-[700px]">
+      <p class="text-lg leading-[1.7] text-ink">
       Licence usage, prompts submitted and employees trained are activity measures. They do not show
       whether AI has reduced cost, released usable capacity, improved conversion, increased gross
       profit or lowered operational risk.
     </p>
-  </div>
+      <p class="mt-6 text-[0.9375rem] leading-[1.7] text-muted md:text-base">
+        The useful question is not whether people are using AI. It is whether each initiative should
+        be stopped, repaired, consolidated or expanded, and what evidence supports that decision.
+      </p>
 
-  <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    {
-      [
-        { n: '01', title: 'Recover wasted software spend', delay: '1' },
-        { n: '02', title: 'Repair high-potential workflows', delay: '1' },
-        { n: '03', title: 'Measure realised operational value', delay: '2' },
-        { n: '04', title: 'Prioritise the next 90 days', delay: '2' },
-      ].map((card) => (
-        <article
-          data-reveal
-          data-reveal-delay={card.delay}
-          class="reveal-sequence panel lift-hover flex flex-col gap-5 p-5 md:p-6"
-        >
-          <span
-            aria-hidden="true"
-            class="font-display text-[1.75rem] leading-none text-accent/45"
-          >
-            {card.n}
-          </span>
-          <h3 class="text-[0.9375rem] font-semibold leading-snug md:text-base">{card.title}</h3>
-        </article>
-      ))
-    }
+      <aside class="mt-8 border-l-2 border-accent pl-6">
+        <p class="text-xl font-semibold leading-[1.5] text-ink md:text-2xl">
+          Time saved has no financial value until the business can use it.
+        </p>
+      </aside>
+    </div>
   </div>
-
-  <aside
-    data-reveal
-    data-reveal-delay="3"
-    class="reveal-sequence mt-8 border-l-2 border-accent bg-surface-soft/80 px-6 py-5 md:px-8"
-  >
-    <p class="text-[0.9375rem] leading-[1.65] text-ink md:text-base">
-      Time saved only has financial value when that capacity is redeployed, cost
-      is removed or revenue-producing work increases.
-    </p>
-  </aside>
 </section>

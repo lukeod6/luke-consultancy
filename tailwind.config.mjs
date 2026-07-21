@@ -6,30 +6,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#F4F8F6',
-        ink: '#1F2933',
-        muted: '#44525C',
-        border: '#C7D5D2',
+        paper: '#F7F4ED',
+        ink: '#202729',
+        muted: '#4F5A5C',
+        border: '#CBC8BE',
         surface: '#FFFFFF',
-        'surface-soft': '#EAF4F1',
-        'surface-strong': '#1F2933',
-        // Single teal accent, three weights. `accent` passes AA on paper and
-        // white, so it can carry text and rules rather than only 6px dots.
-        accent: '#2F6F5E',
-        'accent-strong': '#245A4C',
-        'accent-soft': '#90BAAD',
-        'accent-wash': '#DCEBE5',
-        slate: '#5F6B75',
-        'cool-steel': '#6F8790',
+        'surface-soft': '#ECE8DF',
+        'surface-strong': '#202729',
+        accent: '#2D5E4E',
+        'accent-strong': '#23493D',
+        'accent-soft': '#9CB7AD',
+        'accent-wash': '#E1E9E5',
+        slate: '#657073',
+        'cool-steel': '#788B8D',
       },
       fontFamily: {
-        display: ['"Instrument Serif"', 'Georgia', 'serif'],
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        display: ['"IBM Plex Sans"', ...defaultTheme.fontFamily.sans],
+        sans: ['"IBM Plex Sans"', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
-        'display-lg': ['clamp(2.75rem, 6.5vw, 5.5rem)', { lineHeight: '1.02', letterSpacing: '-0.03em' }],
-        'display-md': ['clamp(2.25rem, 5vw, 4.25rem)', { lineHeight: '1.04', letterSpacing: '-0.025em' }],
-        'section-title': ['clamp(1.75rem, 3.5vw, 2.85rem)', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
+        'display-lg': ['clamp(2.75rem, 6vw, 5.1rem)', { lineHeight: '0.98', letterSpacing: '-0.045em' }],
+        'display-md': ['clamp(2.25rem, 4.5vw, 4rem)', { lineHeight: '1.02', letterSpacing: '-0.035em' }],
+        'section-title': ['clamp(1.9rem, 3.2vw, 2.75rem)', { lineHeight: '1.08', letterSpacing: '-0.035em' }],
         lead: ['clamp(1.0625rem, 1.2vw, 1.125rem)', { lineHeight: '1.65' }],
       },
       maxWidth: {
@@ -45,15 +43,13 @@ export default {
         'section-lg': '7.25rem',
       },
       borderRadius: {
-        panel: '1.5rem',
-        'panel-lg': '2rem',
+        panel: '0.5rem',
+        'panel-lg': '0.75rem',
       },
       boxShadow: {
-        // Layered: a tight contact shadow reads as an edge, the wide one as depth.
-        // A single wide blur alone just looks foggy.
-        glow: '0 1px 2px rgba(31, 41, 51, 0.16), 0 8px 24px rgba(31, 41, 51, 0.18)',
-        panel: '0 1px 2px rgba(31, 41, 51, 0.05), 0 12px 32px -8px rgba(31, 41, 51, 0.13)',
-        'panel-lift': '0 2px 4px rgba(31, 41, 51, 0.06), 0 22px 48px -12px rgba(31, 41, 51, 0.20)',
+        glow: '0 1px 2px rgba(32, 39, 41, 0.12)',
+        panel: '0 1px 2px rgba(32, 39, 41, 0.08)',
+        'panel-lift': '0 2px 4px rgba(32, 39, 41, 0.10)',
       },
     },
   },
