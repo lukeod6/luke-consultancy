@@ -66,7 +66,6 @@ import { siteConfig } from '../config/site';
 
     const accent = color('--color-accent', '#2a6b5a');
     const accentSoft = color('--color-accent-soft', '#8fbfb0');
-    const accentWash = color('--color-accent-wash', '#e4f2ee');
     const focus = color('--color-focus', '#2f7d8f');
 
     /* Brand constellation in normalised stage space */
@@ -456,18 +455,6 @@ import { siteConfig } from '../config/site';
           ctx.globalAlpha = 0.7 + Math.sin(elapsed * 4 + i) * 0.15;
           ctx.fill();
         }
-      }
-      ctx.globalAlpha = 1;
-
-      /* Formation bloom — brief soft flash into page atmosphere */
-      if (bloom > 0.05) {
-        const flash = ctx.createRadialGradient(w * 0.5, h * 0.46, 0, w * 0.5, h * 0.46, w * 0.38);
-        flash.addColorStop(0, accentWash);
-        flash.addColorStop(0.45, accentSoft);
-        flash.addColorStop(1, 'transparent');
-        ctx.fillStyle = flash;
-        ctx.globalAlpha = bloom * 0.22;
-        ctx.fillRect(0, 0, w, h);
       }
       ctx.globalAlpha = 1;
 
