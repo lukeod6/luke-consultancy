@@ -5,9 +5,71 @@
     "theme": "custom",
     "theme_axes": "light / geometric-sans / chromatic-teal ~175°",
     "vibe": "soft technical mist, cool teal signal",
-    "enrichment": "Tier-A soft atmosphere",
+    "enrichment": "Tier-A canvas signal-swarm (unboxed)",
     "nav": "N10",
     "footer": "Ft5",
-    "brief": "SignalFormation · technical-soft futuristic redesign"
+    "motion": "scatter-swarm · magnetic-lock · edge-pulse · form-bloom",
+    "brief": "SignalFormation · unboxed fun signal-swarm (no caption, no card)"
+  },
+  {
+    "date": "2026-07-23",
+    "macrostructure": "Narrative Workflow",
+    "theme": "custom",
+    "theme_axes": "light / geometric-sans / chromatic-teal ~175°",
+    "vibe": "soft technical mist, cool teal signal",
+    "enrichment": "Tier-A canvas signal-coalesce",
+    "nav": "N10",
+    "footer": "Ft5",
+    "motion": "hero-cascade · diagonal-streak · path-packet · coalesce-lock",
+    "brief": "SignalFormation · noise rain coalesces into constellation (gif DNA, not Rainfall)"
+  },
+  {
+    "date": "2026-07-23",
+    "macrostructure": "Narrative Workflow",
+    "theme": "custom",
+    "theme_axes": "light / geometric-sans / chromatic-teal ~175°",
+    "vibe": "soft technical mist, cool teal signal",
+    "enrichment": "Tier-B ASCII signal-formation",
+    "nav": "N10",
+    "footer": "Ft5",
+    "motion": "hero-cascade · ascii-rain · pointer-aura",
+    "brief": "SignalFormation · Rainfall-DNA hero (glyph field, rain, aura)",
+    "studied": "https://www.rainfall.build"
+  },
+  {
+    "date": "2026-07-23",
+    "macrostructure": "Narrative Workflow",
+    "theme": "custom",
+    "theme_axes": "light / geometric-sans / chromatic-teal ~175°",
+    "vibe": "soft technical mist, cool teal signal",
+    "enrichment": "Tier-B SVG signal-formation",
+    "nav": "N10",
+    "footer": "Ft5",
+    "motion": "hero-cascade · pointer-shear · node-focus",
+    "brief": "SignalFormation · subtle interactive hero constellation"
+  },
+  {
+    "date": "2026-07-23",
+    "macrostructure": "Narrative Workflow",
+    "theme": "custom",
+    "theme_axes": "light / geometric-sans / chromatic-teal ~175°",
+    "vibe": "soft technical mist, cool teal signal",
+    "enrichment": "Tier-B SVG signal-formation",
+    "nav": "N10",
+    "footer": "Ft5",
+    "motion": "hero-cascade · signal-formation · section-reveal",
+    "brief": "SignalFormation · hero noise→signal brand animation"
+  },
+  {
+    "date": "2026-07-23",
+    "macrostructure": "Narrative Workflow",
+    "theme": "custom",
+    "theme_axes": "light / geometric-sans / chromatic-teal ~175°",
+    "vibe": "soft technical mist, cool teal signal",
+    "enrichment": "Tier-A atmosphere-pulse",
+    "nav": "N10",
+    "footer": "Ft5",
+    "motion": "hero-cascade · atmosphere-pulse · section-reveal",
+    "brief": "SignalFormation · motion redesign for vibrant/exciting feel"
   }
 ]

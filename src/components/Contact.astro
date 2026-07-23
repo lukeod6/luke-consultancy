@@ -5,9 +5,11 @@ import { siteConfig } from '../config/site';
 <section id="contact" class="relative overflow-hidden border-t border-ink">
   <div class="atmosphere opacity-70" aria-hidden="true">
     <div class="atmosphere__orb atmosphere__orb--b"></div>
+    <div class="atmosphere__orb atmosphere__orb--c"></div>
+    <div class="atmosphere__beam"></div>
   </div>
   <div class="container-full relative grid gap-10 py-16 md:py-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)] lg:gap-16">
-    <div class="min-w-0">
+    <div class="min-w-0" data-reveal style="--i: 0">
       <h2 class="text-section-title text-balance">
         Bring the awkward AI question.
       </h2>
@@ -21,7 +23,7 @@ import { siteConfig } from '../config/site';
       </p>
     </div>
 
-    <div class="self-end lg:border-l lg:border-border lg:pl-10">
+    <div class="self-end lg:border-l lg:border-border lg:pl-10" data-reveal style="--i: 1">
       <p class="label">Start with a conversation</p>
       <div class="mt-5">
         <a

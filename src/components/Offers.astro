@@ -6,7 +6,11 @@
     </div>
 
     <div class="mt-12 space-y-0" data-stages>
-      <article class="stage-panel grid gap-8 py-10 lg:grid-cols-[minmax(220px,0.65fr)_minmax(0,1.35fr)] lg:gap-14" style="--i: 0">
+      <article
+        class="grid gap-8 border-t border-border py-10 lg:grid-cols-[minmax(220px,0.65fr)_minmax(0,1.35fr)] lg:gap-14"
+        data-reveal
+        style="--i: 0"
+      >
         <div>
           <p class="stage-num">01 · Review</p>
           <h3 class="mt-3 text-2xl tracking-[-0.02em]">AI Value Recovery Review</h3>
@@ -74,7 +78,11 @@
         </div>
       </article>
 
-      <article class="stage-panel grid gap-8 border-t border-border py-10 md:grid-cols-2 md:gap-12" style="--i: 1">
+      <article
+        class="grid gap-8 border-t border-border py-10 md:grid-cols-2 md:gap-12"
+        data-reveal
+        style="--i: 1"
+      >
         <div>
           <p class="stage-num">02 · Remediate</p>
           <h3 class="mt-3 text-xl font-semibold tracking-[-0.02em]">Focused Remediation Sprint</h3>
@@ -88,7 +96,7 @@
         </div>
 
         <div class="border-t border-border pt-8 md:border-l md:border-t-0 md:pl-12 md:pt-0">
-          <p class="stage-num">03 · Oversee</p>
+          <p class="stage-num">Oversee</p>
           <h3 class="mt-3 text-xl font-semibold tracking-[-0.02em]">Independent Oversight</h3>
           <p class="mt-5 text-[0.9375rem] leading-[1.65] text-muted md:text-base">
             SignalFormation can challenge vendors, track benefits and report to leadership without
@@ -99,27 +107,3 @@
     </div>
   </div>
 </section>
-
-<script>
-  (() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const panels = document.querySelectorAll('.stage-panel');
-    if (!panels.length) return;
-    if (reduced) {
-      panels.forEach((el) => el.classList.add('is-in'));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-in');
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' },
-    );
-    panels.forEach((el) => io.observe(el));
-  })();
-</script>

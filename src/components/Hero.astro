@@ -6,18 +6,22 @@ import { siteConfig } from '../config/site';
   <div class="atmosphere" aria-hidden="true">
     <div class="atmosphere__orb atmosphere__orb--a"></div>
     <div class="atmosphere__orb atmosphere__orb--b"></div>
-    <div class="atmosphere__grid"></div>
+    <div class="atmosphere__orb atmosphere__orb--c"></div>
   </div>
 
-  <div class="container-full relative min-h-[min(88vh,52rem)] py-24 md:flex md:items-end md:py-28 lg:py-32">
-    <div class="hero-intro max-w-hero min-w-0 pb-4">
-      <p class="hero-brand">SignalFormation</p>
-      <h1 class="mt-5 text-display-lg text-balance">Make AI earn its keep.</h1>
-      <p class="mt-6 max-w-[38rem] text-lead text-muted">
+  <div
+    class="container-full relative grid min-h-[min(88vh,52rem)] items-center gap-10 py-24 md:py-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:py-32"
+  >
+    <div class="max-w-hero min-w-0 pb-2 lg:pb-4">
+      <p class="hero-brand hero-cascade" style="--i: 0">SignalFormation</p>
+      <h1 class="hero-cascade mt-5 text-display-lg text-balance" style="--i: 1">
+        Make AI earn its keep.
+      </h1>
+      <p class="hero-cascade mt-6 max-w-[38rem] text-lead text-muted" style="--i: 2">
         SignalFormation helps established SMEs assess existing AI expenditure, identify what is
         blocking adoption and turn viable initiatives into measurable operational improvements.
       </p>
-      <div class="mt-9 flex flex-wrap items-center gap-3">
+      <div class="hero-cascade mt-9 flex flex-wrap items-center gap-3" style="--i: 3">
         <a
           href={siteConfig.bookingUrl}
           target="_blank"
@@ -29,5 +33,527 @@ import { siteConfig } from '../config/site';
         <a href="#approach" class="btn-secondary">See how the review works</a>
       </div>
     </div>
+
+    <aside
+      class="signal-field hero-cascade hidden min-w-0 justify-self-stretch md:block lg:justify-self-end"
+      style="--i: 2"
+      data-signal-field
+      aria-label="Scattered noise gathers into a living signal. Move the pointer to pull particles into formation."
+    >
+      <div class="signal-field__stage">
+        <canvas class="signal-field__canvas" width="560" height="560" aria-hidden="true"></canvas>
+      </div>
+    </aside>
   </div>
 </section>
+
+<script>
+  (() => {
+    const root = document.querySelector('[data-signal-field]');
+    if (!(root instanceof HTMLElement)) return;
+
+    const canvas = root.querySelector('.signal-field__canvas');
+    if (!(canvas instanceof HTMLCanvasElement)) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileMq = window.matchMedia('(max-width: 767px)');
+    const isStatic = () => reduceMq.matches || mobileMq.matches;
+    const styles = getComputedStyle(document.documentElement);
+    const color = (name, fallback) => styles.getPropertyValue(name).trim() || fallback;
+
+    const accent = color('--color-accent', '#2a6b5a');
+    const accentSoft = color('--color-accent-soft', '#8fbfb0');
+    const accentWash = color('--color-accent-wash', '#e4f2ee');
+    const focus = color('--color-focus', '#2f7d8f');
+
+    /* Brand constellation in normalised stage space */
+    const nodes = [
+      { x: 0.5, y: 0.3, r: 8 },
+      { x: 0.36, y: 0.46, r: 6.5 },
+      { x: 0.64, y: 0.46, r: 6.5 },
+      { x: 0.24, y: 0.62, r: 5 },
+      { x: 0.76, y: 0.62, r: 5 },
+    ];
+    const edges = [
+      [0, 1],
+      [0, 2],
+      [1, 3],
+      [2, 4],
+      [1, 2],
+    ];
+
+    let w = 560;
+    let h = 560;
+    let dpr = 1;
+    let mx = 0.5;
+    let my = 0.45;
+    let pointerIn = false;
+    let raf = 0;
+    let running = false;
+    let t0 = performance.now();
+    let phase = 'gather'; /* gather | hold | release */
+    let phaseT = 0;
+    let bloom = 0;
+
+    const particles = [];
+    const packets = [];
+    const sparks = [];
+    const charge = nodes.map(() => 0);
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = Math.max(280, Math.floor(rect.width));
+      h = Math.max(280, Math.floor(rect.height));
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const rand = (a, b) => a + Math.random() * (b - a);
+
+    const spawnParticle = (bound = false) => {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = bound ? rand(0.08, 0.22) : rand(0.28, 0.62);
+      const cx = 0.5 + Math.cos(angle) * dist * 0.95;
+      const cy = 0.48 + Math.sin(angle) * dist * 0.85;
+      particles.push({
+        x: cx,
+        y: cy,
+        vx: rand(-0.0012, 0.0012),
+        vy: rand(-0.0012, 0.0012),
+        r: rand(1.1, 2.6),
+        alpha: rand(0.32, 0.72),
+        hue: Math.random() > 0.7 ? 'focus' : Math.random() > 0.4 ? 'accent' : 'soft',
+        home: -1,
+        settle: 0,
+        wobble: rand(0, Math.PI * 2),
+        spin: rand(0.8, 1.6),
+      });
+    };
+
+    const spawnPacket = (edgeIndex) => {
+      packets.push({
+        edge: edgeIndex,
+        t: 0,
+        speed: rand(0.012, 0.022),
+        life: 1,
+      });
+    };
+
+    const spawnSpark = (x, y) => {
+      sparks.push({
+        x,
+        y,
+        life: 1,
+        r: rand(6, 14),
+      });
+    };
+
+    const fillColor = (hue, alpha) => {
+      ctx.globalAlpha = alpha;
+      if (hue === 'focus') ctx.fillStyle = focus;
+      else if (hue === 'soft') ctx.fillStyle = accentSoft;
+      else ctx.fillStyle = accent;
+    };
+
+    const strokeColor = (hue, alpha) => {
+      ctx.globalAlpha = alpha;
+      if (hue === 'focus') ctx.strokeStyle = focus;
+      else if (hue === 'soft') ctx.strokeStyle = accentSoft;
+      else ctx.strokeStyle = accent;
+    };
+
+    const structureLevel = () => charge.reduce((a, b) => a + b, 0) / nodes.length;
+
+    const drawStatic = () => {
+      ctx.clearRect(0, 0, w, h);
+
+      for (const [a, b] of edges) {
+        const na = nodes[a];
+        const nb = nodes[b];
+        ctx.beginPath();
+        ctx.moveTo(na.x * w, na.y * h);
+        ctx.lineTo(nb.x * w, nb.y * h);
+        ctx.strokeStyle = accent;
+        ctx.globalAlpha = 0.5;
+        ctx.lineWidth = 1.6;
+        ctx.stroke();
+      }
+      for (const n of nodes) {
+        ctx.beginPath();
+        ctx.arc(n.x * w, n.y * h, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = 0.9;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    };
+
+    const setPhase = (next) => {
+      phase = next;
+      phaseT = 0;
+      if (next === 'gather') {
+        for (let i = 0; i < charge.length; i++) charge[i] = 0;
+        for (const p of particles) {
+          p.home = -1;
+          p.settle = 0;
+          const angle = Math.random() * Math.PI * 2;
+          const dist = rand(0.32, 0.58);
+          p.x = 0.5 + Math.cos(angle) * dist;
+          p.y = 0.48 + Math.sin(angle) * dist * 0.9;
+          p.vx = rand(-0.002, 0.002);
+          p.vy = rand(-0.002, 0.002);
+        }
+        packets.length = 0;
+      }
+    };
+
+    const tick = (now) => {
+      if (!running) return;
+      const dt = (Math.min(32, now - (tick._last || now)) / 16.67) * 0.72;
+      tick._last = now;
+      const elapsed = (now - t0) / 1000;
+      phaseT += dt / 60;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const structure = structureLevel();
+      bloom = Math.max(0, bloom - 0.018 * dt);
+
+      /* No canvas wash — atmosphere orbs already provide the mist */
+
+      /* Phase machine: gather → hold → release → gather */
+      if (phase === 'gather' && structure > 0.92) {
+        bloom = 1;
+        setPhase('hold');
+      } else if (phase === 'hold' && phaseT > 2.4) {
+        setPhase('release');
+      } else if (phase === 'release' && phaseT > 1.6) {
+        setPhase('gather');
+      }
+
+      const gatherPower =
+        phase === 'gather' ? Math.min(1, 0.28 + phaseT * 0.55) : phase === 'hold' ? 1 : Math.max(0, 1 - phaseT * 0.7);
+      const pointerBoost = pointerIn ? 1.45 : 1;
+
+      /* Edges grow as nodes charge */
+      for (let e = 0; e < edges.length; e++) {
+        const [ai, bi] = edges[e];
+        const na = nodes[ai];
+        const nb = nodes[bi];
+        const edgeReady = Math.min(charge[ai], charge[bi]);
+        if (edgeReady < 0.08) continue;
+
+        const ax = na.x * w;
+        const ay = na.y * h;
+        const bx = nb.x * w;
+        const by = nb.y * h;
+
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.strokeStyle = accent;
+        ctx.globalAlpha = 0.12 + edgeReady * 0.55;
+        ctx.lineWidth = 1.2 + edgeReady * 1.4;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        /* Soft glow ribbon */
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.strokeStyle = accentSoft;
+        ctx.globalAlpha = edgeReady * 0.18;
+        ctx.lineWidth = 4 + edgeReady * 3;
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+
+      /* Packets race once structure is alive */
+      if (phase !== 'release' && structure > 0.45 && packets.length < 8 && Math.random() < 0.08 + structure * 0.1) {
+        const ready = edges
+          .map((_, i) => i)
+          .filter((i) => Math.min(charge[edges[i][0]], charge[edges[i][1]]) > 0.55);
+        if (ready.length) spawnPacket(ready[Math.floor(Math.random() * ready.length)]);
+      }
+
+      for (let i = packets.length - 1; i >= 0; i--) {
+        const p = packets[i];
+        p.t += p.speed * dt;
+        if (p.t > 1) {
+          packets.splice(i, 1);
+          continue;
+        }
+        const [ai, bi] = edges[p.edge];
+        const na = nodes[ai];
+        const nb = nodes[bi];
+        const x = (na.x + (nb.x - na.x) * p.t) * w;
+        const y = (na.y + (nb.y - na.y) * p.t) * h;
+        const trail = 0.12;
+
+        ctx.beginPath();
+        ctx.moveTo(
+          (na.x + (nb.x - na.x) * Math.max(0, p.t - trail)) * w,
+          (na.y + (nb.y - na.y) * Math.max(0, p.t - trail)) * h,
+        );
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = focus;
+        ctx.globalAlpha = 0.55;
+        ctx.lineWidth = 2.2;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(x, y, 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = focus;
+        ctx.globalAlpha = 0.9;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      /* Playful spark pops when particles lock */
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        s.life -= 0.06 * dt;
+        if (s.life <= 0) {
+          sparks.splice(i, 1);
+          continue;
+        }
+        ctx.beginPath();
+        ctx.arc(s.x * w, s.y * h, s.r * (1 - s.life * 0.35), 0, Math.PI * 2);
+        ctx.strokeStyle = focus;
+        ctx.globalAlpha = s.life * 0.45;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+
+      /* Particles: scatter, then spring into homes */
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.wobble += 0.04 * p.spin * dt;
+
+        if (phase === 'release') {
+          p.home = -1;
+          p.settle = Math.max(0, p.settle - 0.04 * dt);
+          const angle = Math.atan2(p.y - 0.48, p.x - 0.5);
+          p.vx += Math.cos(angle) * 0.00035 * dt;
+          p.vy += Math.sin(angle) * 0.00035 * dt;
+          for (let c = 0; c < charge.length; c++) {
+            charge[c] = Math.max(0, charge[c] - 0.008 * dt);
+          }
+        } else if (p.home < 0 && gatherPower > 0.2) {
+          /* Pick nearest under-filled node */
+          let best = -1;
+          let bestD = Infinity;
+          for (let n = 0; n < nodes.length; n++) {
+            if (charge[n] > 0.98) continue;
+            const dx = nodes[n].x - p.x;
+            const dy = nodes[n].y - p.y;
+            const d = dx * dx + dy * dy;
+            if (d < bestD) {
+              bestD = d;
+              best = n;
+            }
+          }
+          if (best >= 0 && Math.sqrt(bestD) < 0.12 + gatherPower * 0.22) {
+            p.home = best;
+          }
+        }
+
+        if (p.home >= 0 && phase !== 'release') {
+          const n = nodes[p.home];
+          const orbit = 0.018 + (i % 5) * 0.004;
+          const ox = n.x + Math.cos(p.wobble) * orbit * (1 - p.settle);
+          const oy = n.y + Math.sin(p.wobble * 1.15) * orbit * (1 - p.settle);
+          const pull = 0.08 + gatherPower * 0.12;
+          p.vx += (ox - p.x) * pull * dt;
+          p.vy += (oy - p.y) * pull * dt;
+          p.vx *= 0.86;
+          p.vy *= 0.86;
+          p.settle = Math.min(1, p.settle + 0.03 * dt);
+
+          if (p.settle > 0.55 && charge[p.home] < 1) {
+            const before = charge[p.home];
+            charge[p.home] = Math.min(1, charge[p.home] + 0.01 * dt);
+            if (before < 0.55 && charge[p.home] >= 0.55) spawnSpark(n.x, n.y);
+          }
+        } else {
+          /* Drift + mild swirl + pointer magnet */
+          p.vx += Math.cos(p.wobble) * 0.00008 * dt;
+          p.vy += Math.sin(p.wobble * 0.9) * 0.00008 * dt;
+          if (pointerIn) {
+            const dx = mx - p.x;
+            const dy = my - p.y;
+            const d2 = dx * dx + dy * dy + 0.02;
+            p.vx += (dx / d2) * 0.00009 * pointerBoost * dt;
+            p.vy += (dy / d2) * 0.00009 * pointerBoost * dt;
+          }
+          p.vx *= 0.992;
+          p.vy *= 0.992;
+        }
+
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+
+        /* Soft bounds — bounce back into the mist */
+        if (p.x < 0.05 || p.x > 0.95) p.vx *= -0.8;
+        if (p.y < 0.08 || p.y > 0.92) p.vy *= -0.8;
+        p.x = Math.min(0.96, Math.max(0.04, p.x));
+        p.y = Math.min(0.94, Math.max(0.06, p.y));
+
+        const px = p.x * w;
+        const py = p.y * h;
+        const size = p.r * (1 + p.settle * 0.35);
+
+        fillColor(p.hue, p.alpha * (0.55 + p.settle * 0.45));
+        ctx.beginPath();
+        ctx.arc(px, py, size, 0, Math.PI * 2);
+        ctx.fill();
+
+        /* Tiny motion streak while free */
+        if (p.home < 0) {
+          strokeColor(p.hue, p.alpha * 0.35);
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(px - p.vx * w * 8, py - p.vy * h * 8);
+          ctx.lineTo(px, py);
+          ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 1;
+
+      /* Nodes swell as they lock signal */
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        const lock = charge[i];
+        const pulse =
+          1 + Math.sin(elapsed * 2.4 + i * 1.1) * 0.06 * Math.max(lock, bloom);
+        const radius = (n.r * 0.55 + lock * n.r * 0.7) * pulse;
+
+        if (lock > 0.15 || bloom > 0.2) {
+          ctx.beginPath();
+          ctx.arc(n.x * w, n.y * h, radius * (2.2 + bloom), 0, Math.PI * 2);
+          ctx.fillStyle = accent;
+          ctx.globalAlpha = 0.07 * Math.max(lock, bloom);
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(n.x * w, n.y * h, Math.max(2.2, radius), 0, Math.PI * 2);
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = 0.2 + lock * 0.75;
+        ctx.fill();
+
+        if (lock > 0.75) {
+          ctx.beginPath();
+          ctx.arc(n.x * w, n.y * h, 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = focus;
+          ctx.globalAlpha = 0.7 + Math.sin(elapsed * 4 + i) * 0.15;
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+
+      /* Formation bloom — brief soft flash into page atmosphere */
+      if (bloom > 0.05) {
+        const flash = ctx.createRadialGradient(w * 0.5, h * 0.46, 0, w * 0.5, h * 0.46, w * 0.38);
+        flash.addColorStop(0, accentWash);
+        flash.addColorStop(0.45, accentSoft);
+        flash.addColorStop(1, 'transparent');
+        ctx.fillStyle = flash;
+        ctx.globalAlpha = bloom * 0.22;
+        ctx.fillRect(0, 0, w, h);
+      }
+      ctx.globalAlpha = 1;
+
+      raf = requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      t0 = performance.now();
+      tick._last = performance.now();
+      setPhase('gather');
+      if (!particles.length) {
+        const count = w < 400 ? 52 : 78;
+        for (let i = 0; i < count; i++) spawnParticle();
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    const stop = () => {
+      running = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    let inView = true;
+
+    const applyMode = () => {
+      resize();
+      if (isStatic()) {
+        stop();
+        drawStatic();
+        return;
+      }
+      if (inView) start();
+    };
+
+    root.addEventListener(
+      'pointermove',
+      (event) => {
+        if (isStatic()) return;
+        const rect = canvas.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        pointerIn = true;
+        mx = (event.clientX - rect.left) / rect.width;
+        my = (event.clientY - rect.top) / rect.height;
+      },
+      { passive: true },
+    );
+    root.addEventListener('pointerleave', () => {
+      pointerIn = false;
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            inView = entry.isIntersecting;
+            if (isStatic()) {
+              stop();
+              drawStatic();
+            } else if (inView) {
+              start();
+            } else {
+              stop();
+            }
+          }
+        },
+        { threshold: 0.12 },
+      ).observe(root);
+    }
+
+    applyMode();
+
+    const onModeChange = () => applyMode();
+    reduceMq.addEventListener('change', onModeChange);
+    mobileMq.addEventListener('change', onModeChange);
+
+    window.addEventListener(
+      'resize',
+      () => {
+        resize();
+        if (isStatic()) drawStatic();
+      },
+      { passive: true },
+    );
+  })();
+</script>
+
