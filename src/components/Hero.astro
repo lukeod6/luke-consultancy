@@ -2,15 +2,22 @@
 import { siteConfig } from '../config/site';
 ---
 
-<section class="container-full pb-10 pt-24 md:pb-12 md:pt-28 lg:pt-32">
-  <div class="grid items-end gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
-    <div class="hero-intro max-w-hero">
-      <h1 class="text-display-lg text-balance">Make AI earn its keep.</h1>
-      <p class="mt-6 max-w-[620px] text-lead text-muted">
+<section class="relative overflow-hidden">
+  <div class="atmosphere" aria-hidden="true">
+    <div class="atmosphere__orb atmosphere__orb--a"></div>
+    <div class="atmosphere__orb atmosphere__orb--b"></div>
+    <div class="atmosphere__grid"></div>
+  </div>
+
+  <div class="container-full relative min-h-[min(88vh,52rem)] py-24 md:flex md:items-end md:py-28 lg:py-32">
+    <div class="hero-intro max-w-hero min-w-0 pb-4">
+      <p class="hero-brand">SignalFormation</p>
+      <h1 class="mt-5 text-display-lg text-balance">Make AI earn its keep.</h1>
+      <p class="mt-6 max-w-[38rem] text-lead text-muted">
         SignalFormation helps established SMEs assess existing AI expenditure, identify what is
         blocking adoption and turn viable initiatives into measurable operational improvements.
       </p>
-      <div class="mt-8 flex flex-wrap items-center gap-3">
+      <div class="mt-9 flex flex-wrap items-center gap-3">
         <a
           href={siteConfig.bookingUrl}
           target="_blank"
@@ -22,39 +29,5 @@ import { siteConfig } from '../config/site';
         <a href="#approach" class="btn-secondary">See how the review works</a>
       </div>
     </div>
-
-    <div class="border-y border-ink/20 py-6 md:py-8 lg:border-x-0">
-      <article>
-        <p class="label">The starting point</p>
-        <h2 class="mt-3 text-3xl font-semibold tracking-[-0.025em] md:text-[2.35rem]">
-          AI Value Recovery Review
-        </h2>
-
-        <dl class="mt-6 divide-y divide-border border-y border-border">
-          <div class="flex items-baseline justify-between gap-4 py-3">
-            <dt class="text-sm font-medium text-muted">Duration</dt>
-            <dd class="text-[0.9375rem] font-semibold text-ink md:text-base">7–10 working days</dd>
-          </div>
-          <div class="flex items-baseline justify-between gap-4 py-3">
-            <dt class="text-sm font-medium text-muted">Investment</dt>
-            <dd class="text-[0.9375rem] font-semibold text-accent md:text-base">From £2,500</dd>
-          </div>
-          <div class="flex items-baseline justify-between gap-4 py-3">
-            <dt class="text-sm font-medium text-muted">Scope</dt>
-            <dd class="text-[0.9375rem] font-semibold text-ink md:text-base">Up to 3 workflows</dd>
-          </div>
-        </dl>
-
-        <ul class="list-marked mt-5 space-y-2.5 text-[0.9375rem] leading-relaxed text-muted md:text-base">
-          <li>Up to 5 stakeholder interviews</li>
-          <li>Fixed-scope remote engagement</li>
-        </ul>
-
-        <p class="mt-6 border-t border-border/70 pt-5 text-base font-semibold leading-snug text-ink md:text-lg">
-          An evidence-backed decision for every initiative.
-        </p>
-      </article>
-    </div>
   </div>
-
 </section>

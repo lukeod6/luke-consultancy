@@ -2,42 +2,45 @@
 import { siteConfig } from '../config/site';
 ---
 
-<section id="contact" class="container-full border-t border-ink py-14 md:py-20">
-  <div class="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(300px,0.9fr)] lg:gap-16">
-    <div>
-    <h2 class="text-section-title text-balance">
+<section id="contact" class="relative overflow-hidden border-t border-ink">
+  <div class="atmosphere opacity-70" aria-hidden="true">
+    <div class="atmosphere__orb atmosphere__orb--b"></div>
+  </div>
+  <div class="container-full relative grid gap-10 py-16 md:py-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)] lg:gap-16">
+    <div class="min-w-0">
+      <h2 class="text-section-title text-balance">
         Bring the awkward AI question.
-    </h2>
+      </h2>
       <p class="mt-6 max-w-prose text-[0.9375rem] leading-[1.7] text-muted md:text-base">
-      A 30-minute discussion is usually enough to establish whether an independent review would
-      produce a useful decision.
-    </p>
+        A 30-minute discussion is usually enough to establish whether an independent review would
+        produce a useful decision.
+      </p>
       <p class="mt-5 max-w-prose text-[0.9375rem] leading-[1.7] text-muted md:text-base">
         No sales deck. No speculative transformation programme. SignalFormation will establish
         whether there is a sufficiently valuable problem to examine.
-    </p>
+      </p>
     </div>
 
     <div class="self-end lg:border-l lg:border-border lg:pl-10">
       <p class="label">Start with a conversation</p>
-    <div class="mt-5">
-      <a
-        href={siteConfig.bookingUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+      <div class="mt-5">
+        <a
+          href={siteConfig.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           class="btn-primary"
-      >
-        Book a 30-minute discussion
-      </a>
-    </div>
+        >
+          Book a 30-minute discussion
+        </a>
+      </div>
       <p class="mt-4 text-[0.9375rem] text-muted">
-      Or email
-      <a
-        href={`mailto:${siteConfig.email}`}
-          class="font-semibold text-ink underline underline-offset-4 hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-        >{siteConfig.email}</a
-      >
-    </p>
+        Or email
+        <a
+          href={`mailto:${siteConfig.email}`}
+          class="font-semibold text-ink underline underline-offset-4 hover:text-accent focus-visible:outline-2 focus-visible:outline-[var(--color-focus)] focus-visible:outline-offset-2"
+          >{siteConfig.email}</a
+        >
+      </p>
     </div>
   </div>
 </section>

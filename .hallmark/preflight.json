@@ -1,0 +1,8 @@
+{
+  "scannedAt": "2026-07-23",
+  "fontStack": "Sora + Source Sans 3 + IBM Plex Mono (updated this run; was IBM Plex Sans)",
+  "palette": "custom OKLCH soft-cool mist + teal accent (was cream #F7F4ED + #2D5E4E)",
+  "motion": "none installed; CSS + IntersectionObserver added this run",
+  "spacing": "4pt named scale in tokens.css",
+  "framework": "Astro 5 + Tailwind 3"
+}

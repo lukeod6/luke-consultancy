@@ -1,0 +1,69 @@
+/* Hallmark · macrostructure: Narrative Workflow · H2 knobs: ratio=7/5, right=atmosphere, divider=negative-space
+ * genre: modern-minimal · tone: technical-soft · route: custom (tuned)
+ * vibe: "soft technical mist, cool teal signal"
+ * paper: oklch(97.2% 0.012 210) · accent: oklch(42% 0.11 175) soft-teal
+ * display: Sora · body: Source Sans 3 · mono: IBM Plex Mono
+ * axes: light / geometric-sans / chromatic-teal ~175°
+ * enrichment: E none + Tier-A soft atmosphere · nav: N10 · footer: Ft5
+ * motion: nav-morph · atmosphere-drift · stage-stagger
+ * studied: no
+ */
+
+:root {
+  --color-paper: oklch(97.2% 0.012 210);
+  --color-paper-2: oklch(94.5% 0.016 208);
+  --color-paper-3: oklch(91.5% 0.02 206);
+  --color-ink: oklch(22% 0.022 230);
+  --color-ink-2: oklch(42% 0.018 220);
+  --color-muted: oklch(48% 0.016 215);
+  --color-rule: oklch(86% 0.014 210);
+  --color-rule-2: oklch(90% 0.012 210);
+  --color-accent: oklch(42% 0.11 175);
+  --color-accent-strong: oklch(34% 0.1 175);
+  --color-accent-soft: oklch(76% 0.055 175);
+  --color-accent-wash: oklch(93% 0.032 175);
+  --color-accent-ink: oklch(98.5% 0.008 210);
+  --color-focus: oklch(50% 0.14 195);
+  --color-surface: oklch(99% 0.008 210);
+  --color-surface-strong: oklch(22% 0.022 230);
+
+  --font-display: "Sora", "Segoe UI", sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-display-s: clamp(2rem, 4vw, 3.25rem);
+  --text-display: clamp(2.6rem, 6.2vw, 4.75rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-mid: 520ms;
+  --dur-long: 420ms;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+  --rule-hair: 1px;
+
+  --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --page-max: 1240px;
+  --nav-total-h: 4.5rem;
+}

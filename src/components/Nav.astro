@@ -3,76 +3,54 @@ import { siteConfig } from '../config/site';
 import Logo from './Logo.astro';
 ---
 
-<nav
-  class="sticky top-0 z-50 border-b border-border bg-paper"
->
-  <div class="container-full flex items-center justify-between gap-4 py-4 md:py-5">
-    <a href="#main" class="shrink-0 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
-      <Logo variant="horizontal" />
+<header class="site-nav" data-nav>
+  <div class="site-nav__inner">
+    <a
+      href="#main"
+      class="shrink-0 focus-visible:outline-2 focus-visible:outline-[var(--color-focus)] focus-visible:outline-offset-2"
+    >
+      <Logo variant="horizontal" class="h-7 md:h-8" />
     </a>
 
-    <div class="hidden items-center gap-5 lg:flex xl:gap-6">
-      <a
-        href="#approach"
-        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-      >
-        Approach
-      </a>
-      <a
-        href="#output"
-        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-      >
-        Output
-      </a>
-      <a
-        href="#audience"
-        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-      >
-        Who it is for
-      </a>
-      <a
-        href="#about"
-        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-      >
-        About
-      </a>
-      <a
-        href="#faq"
-        class="text-sm font-semibold text-ink/80 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-      >
-        FAQ
-      </a>
+    <div class="site-nav__links hidden items-center gap-5 lg:flex xl:gap-6">
+      <a href="#approach">Approach</a>
+      <a href="#output">Output</a>
+      <a href="#audience">Who it is for</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
       <a
         href={siteConfig.bookingUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="btn-primary px-5 py-3 text-sm"
+        class="btn-primary px-5 py-2.5 text-sm"
       >
-        Book a 30-minute discussion
+        Book a discussion
       </a>
     </div>
 
     <div class="flex items-center gap-3 lg:hidden">
       <details class="relative">
         <summary
-          class="cursor-pointer list-none rounded-md border border-ink/20 bg-transparent px-4 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+          class="cursor-pointer list-none rounded-[var(--radius-sm)] border border-ink/20 bg-transparent px-4 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-[var(--color-focus)] focus-visible:outline-offset-2"
         >
           Menu
         </summary>
-        <div class="panel absolute right-0 z-50 mt-2 w-56 p-3">
+        <div
+          class="absolute right-0 z-50 mt-2 w-56 rounded-[var(--radius-md)] border border-border bg-surface p-3 shadow-sm"
+        >
           <div class="flex flex-col gap-3 text-sm font-semibold">
-            <a href="#approach" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Approach</a>
-            <a href="#output" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Output</a>
-            <a href="#audience" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Who it is for</a>
-            <a href="#about" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">About</a>
-            <a href="#faq" class="rounded-md px-2 py-1 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">FAQ</a>
+            <a href="#approach" class="rounded-md px-2 py-1 hover:text-accent">Approach</a>
+            <a href="#output" class="rounded-md px-2 py-1 hover:text-accent">Output</a>
+            <a href="#audience" class="rounded-md px-2 py-1 hover:text-accent">Who it is for</a>
+            <a href="#about" class="rounded-md px-2 py-1 hover:text-accent">About</a>
+            <a href="#faq" class="rounded-md px-2 py-1 hover:text-accent">FAQ</a>
             <a
               href={siteConfig.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="rounded-md px-2 py-1 text-ink transition hover:text-muted focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+              class="rounded-md px-2 py-1 text-accent"
             >
-              Book a 30-minute discussion
+              Book a discussion
             </a>
           </div>
         </div>
@@ -83,8 +61,38 @@ import Logo from './Logo.astro';
         rel="noopener noreferrer"
         class="btn-primary hidden px-4 py-2.5 text-sm sm:inline-flex"
       >
-        Book a discussion
+        Book
       </a>
     </div>
   </div>
-</nav>
+</header>
+
+<script>
+  (() => {
+    const nav = document.querySelector('[data-nav]');
+    if (!nav) return;
+    const THRESHOLD = 80;
+    let floating = false;
+    let ticking = false;
+    const update = () => {
+      const next = window.scrollY > THRESHOLD;
+      if (next !== floating) {
+        floating = next;
+        nav.classList.toggle('is-floating', floating);
+      }
+    };
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          update();
+          ticking = false;
+        });
+      },
+      { passive: true },
+    );
+    update();
+  })();
+</script>
