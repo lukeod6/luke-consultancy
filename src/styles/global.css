@@ -301,6 +301,17 @@
     padding-inline: 1.35rem;
   }
 
+  .nav-menu-trigger {
+    border-radius: var(--radius-sm);
+    transition:
+      border-radius var(--dur-mid) var(--ease-out),
+      background-color var(--dur-short) var(--ease-out);
+  }
+
+  .site-nav.is-floating .nav-menu-trigger {
+    border-radius: var(--radius-pill);
+  }
+
   .site-nav__links a {
     white-space: nowrap;
     font-family: var(--font-display);
